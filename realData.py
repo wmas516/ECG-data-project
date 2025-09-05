@@ -13,10 +13,15 @@ dataPath = os.getcwd()+'/DB3/motion-artifact-contaminated-ecg-database-1.0.0/'
 f = open(dataPath+"RECORDS")
 files = f.read().split("\n")
 
-file = input("Which record would you like to display? (format testXX_XXx)\n")
-while(file == "" or file not in files):
-    print("Record not found\n")
-    file = input("Which record would you like to display? (format testXX_XXx)\n")
+file = input("Which record would you like to display? (format testXX_XXx)\nInput list for a list of files\n")
+while(file not in files):
+    print()
+    if file.upper() == "LIST":
+        for fileName in files:
+            print(fileName)
+    else:
+        print("Record not found\n")
+    file = input("Which record would you like to display? (format testXX_XXx)\nInput list for a list of files\n")
 
 record = np.fromfile((dataPath+file+'.dat'), dtype=np.int16)
 fs = 500  
